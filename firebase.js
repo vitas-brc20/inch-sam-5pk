@@ -22,16 +22,7 @@ async function requestPermissionAndGetToken() {
     console.log('Notification permission granted.');
     tokenDisplay.innerText = 'Getting token...';
 
-    // Get the current service worker registration
-    const swRegistration = await navigator.serviceWorker.ready;
-    console.log('Using service worker registration:', swRegistration);
-
-    // Get the token, explicitly passing the service worker registration
-    const token = await messaging.getToken({ 
-        vapidKey: vapidKey,
-        serviceWorkerRegistration: swRegistration
-    });
-
+    const token = await messaging.getToken({ vapidKey: vapidKey });
     if (token) {
       console.log('FCM Token:', token);
       tokenDisplay.innerText = token;
